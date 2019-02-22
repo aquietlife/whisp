@@ -1,5 +1,14 @@
-# esc
-Environmental Sound Classifier
+# Environmental Sound Classifier
+
+Description
+
+## Installation
+
+Install required libraries:
+
+`pip install -r requirements.txt`
+
+## Spectrogram Generator
 
 Based on this dataset:
 
@@ -22,3 +31,12 @@ conda install jupyter
 conda install -c conda-forge librosa
 
 conda install pandas
+
+## Learner Model
+
+
+## Web Server
+
+To run the web server, run:
+
+`

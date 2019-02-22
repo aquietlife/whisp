@@ -4,3 +4,9 @@ pandas
 pytest
 seaborn
 tqdm
+fastai
+starlette
+uvicorn
+aiohttp
+python-multipart
+soundfile
