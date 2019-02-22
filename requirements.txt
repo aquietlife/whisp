@@ -1,0 +1,6 @@
+librosa
+matplotlib
+pandas
+pytest
+seaborn
+tqdm
