@@ -37,9 +37,13 @@ app = Starlette(debug=True)
 
 app.mount('/static', StaticFiles(directory='app/static'))
 
-spectrograms_path = Path('spectrographs')
+path = Path(__file__).parent
 
-data = ImageDataBunch.from_folder(spectrograms_path, train=".", valid_pct=0.2, ds_tfms=get_transforms(), size=360, num_workers=4).normalize(imagenet_stats) #changed size from 224 to 360
+classes = ['airplane', 'breathing', 'brushing_teeth', 'can_opening', 'car_horn', 'cat', 'chainsaw', 'chirping_birds', 'church_bells', 'clapping', 'clock_alarm', 'clock_tick', 'coughing', 'cow', 'crackling_fire', 'crickets', 'crow', 'crying_baby', 'dog', 'door_wood_creaks', 'door_wood_knock', 'drinking_sipping', 'engine', 'fireworks', 'footsteps', 'frog', 'glass_breaking', 'hand_saw', 'helicopter', 'hen', 'insects', 'keyboard_typing', 'laughing', 'mouse_click', 'pig', 'pouring_water', 'rain', 'rooster', 'sea_waves', 'sheep', 'siren', 'sneezing', 'snoring', 'thunderstorm', 'toilet_flush', 'train', 'vacuum_cleaner', 'washing_machine', 'water_drops', 'wind']
+
+data_bunch = ImageDataBunch.single_from_classes(path, classes, tfms=get_transforms(), size=360, num_workers=4).normalize(imagenet_stats)
+
+print(data.classes)
 
 learn = load_learner('app/models')
 
