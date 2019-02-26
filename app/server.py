@@ -12,7 +12,6 @@ import sys
 import uvicorn
 import aiohttp
 import asyncio
-import soundfile as sf
 import pylab
 from PIL import Image
 import matplotlib

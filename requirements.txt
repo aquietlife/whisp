@@ -11,6 +11,5 @@ uvicorn
 aiohttp
 aiofiles
 python-multipart
-soundfile
 imageio
 numpy
