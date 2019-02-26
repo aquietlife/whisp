@@ -27,7 +27,7 @@ import librosa
 from librosa import display
 import numpy as np
 
-templates = Jinja2Templates(directory='templates')
+templates = Jinja2Templates(directory='app/templates')
 
 async def get_bytes(url):
     async with aiohttp.ClientSession() as session:
@@ -36,7 +36,7 @@ async def get_bytes(url):
 
 app = Starlette(debug=True)
 
-app.mount('/static', StaticFiles(directory='statics'), name='static')
+app.mount('/static', StaticFiles(directory='app/static'))
 app.mount('/gifs', StaticFiles(directory='gifs'), name='gifs')
 
 
@@ -44,7 +44,7 @@ spectrograms_path = Path('spectrographs')
 
 data = ImageDataBunch.from_folder(spectrograms_path, train=".", valid_pct=0.2, ds_tfms=get_transforms(), size=360, num_workers=4).normalize(imagenet_stats) #changed size from 224 to 360
 
-learn = load_learner('model')
+learn = load_learner('app/models')
 
 @app.route("/upload", methods=["POST"])
 async def upload(request):
