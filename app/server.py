@@ -36,8 +36,6 @@ async def get_bytes(url):
 app = Starlette(debug=True)
 
 app.mount('/static', StaticFiles(directory='app/static'))
-app.mount('/gifs', StaticFiles(directory='gifs'), name='gifs')
-
 
 spectrograms_path = Path('spectrographs')
 
