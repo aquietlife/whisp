@@ -19,6 +19,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # If you want to add some content to this image because the above takes a LONGGG time to build
 #ARG CACHEBREAK=1
 
+#install libsndfile
+RUN apt-get install libsndfile1
+
 COPY app app/
 
 RUN python app/server.py
