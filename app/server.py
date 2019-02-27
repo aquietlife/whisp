@@ -85,8 +85,8 @@ async def homepage(request):
     return templates.TemplateResponse('index.html', {'request': request})
 
 def create_spectrograph(source_filepath, destination_filepath):    
-    #y, sr = librosa.load(source_filepath, sr = 22050) # Use the default sampling rate of 22,050 Hz
-    y, sr = soundfile.read(source_filepath)
+    y, sr = librosa.load(source_filepath, sr = 22050) # Use the default sampling rate of 22,050 Hz
+    #y, sr = soundfile.read(source_filepath) try this again later
 
     # Pre-emphasis filter
     pre_emphasis = 0.97

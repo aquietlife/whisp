@@ -7,20 +7,20 @@ ADD requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-#install ffmpeg
-#RUN apt-get -y update && apt-get install -y wget nano git build-essential yasm pkg-config
+#install ffmpeg (takes a long time...need to figure out a better solution)
+RUN apt-get -y update && apt-get install -y wget nano git build-essential yasm pkg-config
 
 # Compile and install ffmpeg from source
-#RUN git clone https://github.com/FFmpeg/FFmpeg /root/ffmpeg && \
-#    cd /root/ffmpeg && \
-#    ./configure --enable-nonfree --disable-shared --extra-cflags=-I/usr/local/include && \
-#    make -j8 && make install -j8
+RUN git clone https://github.com/FFmpeg/FFmpeg /root/ffmpeg && \
+    cd /root/ffmpeg && \
+    ./configure --enable-nonfree --disable-shared --extra-cflags=-I/usr/local/include && \
+    make -j8 && make install -j8
 
 # If you want to add some content to this image because the above takes a LONGGG time to build
-#ARG CACHEBREAK=1
+ARG CACHEBREAK=1
 
-#install libsndfile
-RUN apt-get install libsndfile1
+#install libsndfile (need to fix)
+#RUN apt-get install libsndfile1
 
 COPY app app/
 
