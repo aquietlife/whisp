@@ -48,7 +48,7 @@ async def upload(request):
     data = await request.form()
     bytes = await (data["file"].read())
     wav = BytesIO(bytes) #not my favorite way to do this but it works ;)
-    with open('sound.wav', 'wb') as f:
+    with open('tmp/sound.wav', 'wb') as f:
         f.write(wav.getvalue())
     wav.close()
     return predict_sound_from_wav()
@@ -60,11 +60,11 @@ async def classify_url(request):
 
 def predict_sound_from_wav():
     #convert sound to image
-    create_spectrograph("sound.wav", "image.jpg") 
+    create_spectrograph("tmp/sound.wav", "tmp/image.jpg") 
 
     img_bytes = BytesIO()
     #load image from disk
-    with open('image.jpg', 'rb') as f:
+    with open('tmp/image.jpg', 'rb') as f:
          img_bytes = BytesIO(f.read())
     #img_bytes.close()
 
