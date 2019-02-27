@@ -13,4 +13,3 @@ aiofiles
 python-multipart
 imageio
 numpy
-soundfile

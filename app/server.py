@@ -25,7 +25,6 @@ import pylab
 import librosa
 from librosa import display
 import numpy as np
-import soundfile
 
 templates = Jinja2Templates(directory='app/templates')
 
@@ -108,7 +107,6 @@ def create_spectrograph(source_filepath, destination_filepath):
     pylab.axis('off') 
     pylab.axes([0., 0., 1., 1.], frameon=False, xticks=[], yticks=[]) # Remove the white edge
     librosa.display.specshow(log_power, cmap=cm.jet)
-    print(destination_filepath)
     pylab.savefig(destination_filepath, bbox_inches=None, pad_inches=0)
     pylab.close()
 
