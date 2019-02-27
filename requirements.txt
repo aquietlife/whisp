@@ -5,7 +5,7 @@ pandas
 pytest
 seaborn
 tqdm
-fastai
+fastai==1.0.45
 starlette
 uvicorn
 aiohttp
