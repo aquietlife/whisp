@@ -53,6 +53,20 @@ async def upload(request):
     wav.close()
     return predict_sound_from_wav()
 
+@app.route("/upload_new", methods=["POST"])
+async def upload_new(request):
+    form = await request.form()
+    print(form)
+    print(form["file"].filename)
+    audio_file = form["file"].file
+    bytes = await (form["file"].read())
+    wav = BytesIO(bytes) #not my favorite way to do this but it works ;)
+    #await form["file"].write(audio_file)
+    with open('tmp/sound.wav', 'wb') as f:
+        f.write(wav.getvalue())
+    wav.close()
+    return predict_sound_from_wav()
+
 @app.route("/classify-url", methods=["GET"])
 async def classify_url(request):
     bytes = await get_bytes(request.query_params["url"])
