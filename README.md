@@ -18,11 +18,11 @@ Install conda:
 
 Creae a new conda environment:
 
-`conda create -n esc python=3.6`
+`conda create -n whisp python=3.6`
 
 Activate your environment:
 
-`conda activate esc`
+`conda activate whisp`
 
 Install required libraries:
 
