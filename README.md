@@ -1,4 +1,6 @@
-# Environmental Sound Classifier
+# Whisp 
+
+_An Environmental Sound Classifier_
 
 This project comprises of three main parts:
 
