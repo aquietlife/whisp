@@ -18,7 +18,7 @@ Install conda:
 
 `brew install conda`
 
-Creae a new conda environment:
+Create a new conda environment:
 
 `conda create -n whisp python=3.6`
 
@@ -34,13 +34,13 @@ Clone this repo, move into the `whisp` directory and install required libraries:
 
 `pip install -r requirements.txt`
 
-Then you should be good to go!
-
-Before doing anything else, make sure to get the dataset: 
+Finally, make sure to get the ESC-50 dataset: 
 
 `curl -LO https://github.com/karoldvl/ESC-50/archive/master.zip`
 
 `unzip master.zip`
+
+Then you should be good to go!
 
 Start up Jupyter to play in the notebooks:
 
