@@ -70,6 +70,11 @@ The [paper](http://karol.piczak.com/papers/Piczak2015-ESC-Dataset.pdf) on this d
 
 ## Learner Model
 
+[insert confusion matrix?]
+
+Before running this notebook, please make sure you have generated the spectrograms from the [Spectrogram Generator notebook](https://github.com/aquietlife/whisp/blob/master/spectrogram-generator.ipynb).
+
+You will also need to be running this notebook on a GPU machine. I've been using [Paperspace](https://www.paperspace.com/).
 
 ## Web Server
 
