@@ -2,6 +2,8 @@
 
 _An Environmental Sound Classifier_
 
+[insert gif/screengrab of webapp]
+
 This project comprises of three main parts:
 
 - Dataset notebook, which shows you how to make spectrograms from the ESC-50 dataset. It also shows you how to make gifs as well, for fun ;)
@@ -55,15 +57,6 @@ https://github.com/karoldvl/ESC-50
 The paper on this dataset is short and fun to read:
 
 http://karol.piczak.com/papers/Piczak2015-ESC-Dataset.pdf
-
-
-Install:
-
-conda install jupyter
-
-conda install -c conda-forge librosa
-
-conda install pandas
 
 ## Learner Model
 
