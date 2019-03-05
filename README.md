@@ -2,6 +2,8 @@
 
 _An Environmental Sound Classifier_
 
+[insert gif/screengrab of webapp]
+
 This project comprises of three main parts:
 
 - Dataset notebook, which shows you how to make spectrograms from the ESC-50 dataset. It also shows you how to make gifs as well, for fun ;)
@@ -30,29 +32,31 @@ Install required libraries:
 
 Then you should be good to go!
 
-## Spectrogram Generator
-
-Based on this dataset:
-
-https://github.com/karoldvl/ESC-50
-
-Paper:
-
-http://karol.piczak.com/papers/Piczak2015-ESC-Dataset.pdf
-
-To get dataset:
+Before doing anything else, make sure to get the dataset: 
 
 `curl -LO https://github.com/karoldvl/ESC-50/archive/master.zip`
 
-`unzip masters`
+`unzip master.zip`
 
-Install:
+Start up Jupyter to play in the notebooks:
 
-conda install jupyter
+`jupyter notebook`
 
-conda install -c conda-forge librosa
+## Spectrogram Generator
 
-conda install pandas
+[insert gif]
+
+All of our pretraining data munging can be found here:
+
+spectrogram-generator.ipynb
+
+Whisp is trained on the ESC-50 dataset (and its the most accurate based on this table :D!)
+
+https://github.com/karoldvl/ESC-50
+
+The paper on this dataset is short and fun to read:
+
+http://karol.piczak.com/papers/Piczak2015-ESC-Dataset.pdf
 
 ## Learner Model
 
