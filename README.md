@@ -44,7 +44,17 @@ Start up Jupyter to play in the notebooks:
 
 ## Spectrogram Generator
 
-[insert gif]
+Cat:
+![Cat Spectrogram](https://raw.githubusercontent.com/aquietlife/whisp/master/cat.gif "Cat Spectrogram")
+
+Fireworks:
+![Fireworks Spectrogram](https://raw.githubusercontent.com/aquietlife/whisp/master/fireworks.gif "Fireworks Spectrogram")
+
+Sea Waves
+![Sea Waves Spectrogram](https://raw.githubusercontent.com/aquietlife/whisp/master/sea_waves.gif "Sea Waves Spectrogram")
+
+Siren
+![Siren Spectrogram](https://raw.githubusercontent.com/aquietlife/whisp/master/siren.gif "Siren Spectrogram")
 
 All of our pretraining data munging can be found here:
 
