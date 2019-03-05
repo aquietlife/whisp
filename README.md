@@ -48,7 +48,7 @@ Start up Jupyter to play in the notebooks:
 
 ## Spectrogram Generator
 
-### Cat
+### Cats
 
 ![Cat Spectrogram](https://raw.githubusercontent.com/aquietlife/whisp/master/cat.gif "Cat Spectrogram")
 
@@ -60,7 +60,7 @@ Start up Jupyter to play in the notebooks:
 
 ![Sea Waves Spectrogram](https://raw.githubusercontent.com/aquietlife/whisp/master/sea_waves.gif "Sea Waves Spectrogram")
 
-### Siren
+### Sirens
 
 ![Siren Spectrogram](https://raw.githubusercontent.com/aquietlife/whisp/master/siren.gif "Siren Spectrogram")
 
