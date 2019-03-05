@@ -44,29 +44,29 @@ Start up Jupyter to play in the notebooks:
 
 ## Spectrogram Generator
 
-Cat:
+### Cat
+
 ![Cat Spectrogram](https://raw.githubusercontent.com/aquietlife/whisp/master/cat.gif "Cat Spectrogram")
 
-Fireworks:
+### Fireworks
+
 ![Fireworks Spectrogram](https://raw.githubusercontent.com/aquietlife/whisp/master/fireworks.gif "Fireworks Spectrogram")
 
-Sea Waves
+### Sea Waves
+
 ![Sea Waves Spectrogram](https://raw.githubusercontent.com/aquietlife/whisp/master/sea_waves.gif "Sea Waves Spectrogram")
 
-Siren
+### Siren
+
 ![Siren Spectrogram](https://raw.githubusercontent.com/aquietlife/whisp/master/siren.gif "Siren Spectrogram")
 
 All of our pretraining data munging can be found here:
 
-spectrogram-generator.ipynb
+[Spectrogram Generator notebook](https://github.com/aquietlife/whisp/blob/master/spectrogram-generator.ipynb)
 
-Whisp is trained on the ESC-50 dataset (and its the most accurate based on this table :D!)
+Whisp is trained on the [ESC-50 dataset](https://github.com/karoldvl/ESC-50) (and its the most accurate based on this table :D!)
 
-https://github.com/karoldvl/ESC-50
-
-The paper on this dataset is short and fun to read:
-
-http://karol.piczak.com/papers/Piczak2015-ESC-Dataset.pdf
+The [paper](http://karol.piczak.com/papers/Piczak2015-ESC-Dataset.pdf) on this dataset is short and fun to read :)
 
 ## Learner Model
 
@@ -77,5 +77,4 @@ _If you have errors running the app with errors about 'installing Python as a fr
 
 To run the web server, run:
 
-`python esc.py serve`
-`
+`python app/server.py serve`
