@@ -26,7 +26,9 @@ Activate your environment:
 
 `conda activate whisp`
 
-Move into the `whisp` repo and install required libraries:
+Clone this repo, move into the `whisp` directory and install required libraries:
+
+`git clone https://github.com/aquietlife/whisp`
 
 `cd whisp`
 
