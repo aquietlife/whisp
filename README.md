@@ -26,7 +26,9 @@ Activate your environment:
 
 `conda activate whisp`
 
-Install required libraries:
+Move into the `whisp` repo and install required libraries:
+
+`cd whisp`
 
 `pip install -r requirements.txt`
 
