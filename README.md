@@ -111,18 +111,18 @@ After creating your spectrograms, you can run through the [learner](https://gith
 At the end of our second set of training, we get the following results:
 
 epoch 	train_loss 	valid_loss 	error_rate
-1 	1.004599 	0.955555 	0.280000
-2 	0.983463 	2.396468 	0.585000
-3 	1.084720 	1.993167 	0.520000
-4 	1.055390 	1.323817 	0.380000
-5 	0.937236 	1.047446 	0.280000
-6 	0.806796 	0.809364 	0.262500
-7 	0.653438 	0.741908 	0.217500
-8 	0.490650 	0.489861 	0.135000
-9 	0.359554 	0.470506 	0.130000
-10 	0.277465 	0.460627 	0.122500
+1 	1.063904 	1.055990 	0.325000
+2 	1.036396 	2.332567 	0.562500
+3 	1.049258 	1.470638 	0.387500
+4 	1.032500 	1.107848 	0.337500
+5 	0.924266 	1.392631 	0.417500
+6 	0.768478 	0.623403 	0.212500
+7 	0.596911 	0.535597 	0.165000
+8 	0.446205 	0.462682 	0.160000
+9 	0.325181 	0.419656 	0.135000
+10 	0.251277 	0.402070 	0.127500
 
-0.122500 or 87.75% accuracy! 
+0.122500 or 87.25% accuracy! 
 
 At the end of the notebook, we export our model `export.pkl` in the `app/model` directory to be used in our web app ^_^
 
