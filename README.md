@@ -76,7 +76,7 @@ The [paper](http://karol.piczak.com/papers/Piczak2015-ESC-Dataset.pdf) on this d
 
 ## Learner Model
 
-[insert confusion matrix?]
+![Whisp Confusion Matrix](https://raw.githubusercontent.com/aquietlife/whisp/master/whisp_confusion_matrix.png "Whisp Confusion Matrix")
 
 You can train our environmental sound classifier with this notebook:
 
