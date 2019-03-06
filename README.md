@@ -78,9 +78,53 @@ The [paper](http://karol.piczak.com/papers/Piczak2015-ESC-Dataset.pdf) on this d
 
 [insert confusion matrix?]
 
+You can train our environmental sound classifier with this notebook:
+
+[Learner notebook](https://github.com/aquietlife/whisp/blob/master/learner.ipynb)
+
 Before running this notebook, please make sure you have generated the spectrograms from the [Spectrogram Generator notebook](https://github.com/aquietlife/whisp/blob/master/spectrogram-generator.ipynb).
 
-You will also need to be running this notebook on a GPU machine. I've been using [Paperspace](https://www.paperspace.com/).
+You will also need to be running this notebook on a GPU machine. I've been using [Paperspace](https://www.paperspace.com/). More instructions on setting up your Paperspace machine can be found [here](https://github.com/reshamas/fastai_deeplearn_part1/blob/master/tools/paperspace.md).
+
+Ssh into your paperspace machine, clone this repo, and then go through the Spectrogram Generator notebook above to generate your spectrograms for learning.
+
+`ssh paperspace@xxx.xxx.xxx.xxx`
+
+Follow the Installation instructions above, but when you get to starting Jupypter notebook, use this command instead:
+
+`jupyter notebook --no-browser --port=8889 --NotebookApp.allow_remote_access=True`
+
+Open up another tab and ssh into your machine again, like so:
+
+`ssh -N -L localhost:8888:localhost:8889 paperspace@xxx.xxx.xxx.xxx`
+
+It appears to hang after enter on password, but its all good.
+
+Back in the first tab, copy and paste the Jupyter notebook url, but change 8889 to 8888 like so:
+
+`http://localhost:8888/?token=UNIQUE_TOKEN`
+
+From there you should be able to run all the notebooks, so start with the Spectrogram Generator notebook to create your spectrograms for training :)
+
+After creating your spectrograms, you can run through the [learner](https://github.com/aquietlife/whisp/blob/master/learner.ipynb) notebook.
+
+At the end of our second set of training, we get the following results:
+
+epoch 	train_loss 	valid_loss 	error_rate
+1 	1.063904 	1.055990 	0.325000
+2 	1.036396 	2.332567 	0.562500
+3 	1.049258 	1.470638 	0.387500
+4 	1.032500 	1.107848 	0.337500
+5 	0.924266 	1.392631 	0.417500
+6 	0.768478 	0.623403 	0.212500
+7 	0.596911 	0.535597 	0.165000
+8 	0.446205 	0.462682 	0.160000
+9 	0.325181 	0.419656 	0.135000
+10 	0.251277 	0.402070 	0.127500
+
+0.122500 or 87.25% accuracy! 
+
+At the end of the notebook, we export our model `export.pkl` in the `app/model` directory to be used in our web app ^_^
 
 ## Web Server
 
