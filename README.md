@@ -134,3 +134,5 @@ _If you have errors running the app with errors about 'installing Python as a fr
 To run the web server, run:
 
 `python app/server.py serve`
+
+You can test uploading files from the `field_recordings` directory, which has three 5-second recordings that I made.
