@@ -2,8 +2,6 @@
 
 _An Environmental Sound Classifier_
 
-[insert gif/screengrab of webapp]
-
 This project comprises of three main parts:
 
 - Spectrogram generation notebook, which shows you how to make spectrograms from the ESC-50 dataset. It also shows you how to make gifs as well, for fun ;)
