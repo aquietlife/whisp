@@ -76,7 +76,7 @@ All of our pretraining data munging can be found here:
 
 Walk through the notebook, which guides you through creating all the spectrogram data needed for the learner notebook, as well as some bonus code for generating gifs like the ones above.
 
-Whisp is trained on the [ESC-50 dataset](https://github.com/karoldvl/ESC-50) (and its the most accurate based on [this](https://github.com/karoldvl/ESC-50#results) table :D!)
+Whisp is trained on the [ESC-50 dataset](https://github.com/karoldvl/ESC-50)
 
 The [paper](http://karol.piczak.com/papers/Piczak2015-ESC-Dataset.pdf) on this dataset is short and fun to read :)
 
