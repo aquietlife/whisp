@@ -135,4 +135,14 @@ To run the web server, run:
 
 `python app/server.py serve`
 
+The app is served at `http://0.0.0.0:8008`
+
 You can test uploading files from the `field_recordings` directory, which has three 5-second recordings that I made.
+
+## Deployment
+
+The repo is set up to deploy easily to any number of web hosting services that support Docker. 
+
+I ended up going with [Render](https://render.com/), but you can use whatever works for you :)
+
+## Happy listening!
