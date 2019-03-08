@@ -10,13 +10,13 @@ var AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioContext = new AudioContext; //new audio context to help us record
  
 var recordButton = document.getElementById("recordButton");
-var stopButton = document.getElementById("stopButton");
-var pauseButton = document.getElementById("pauseButton"); 
  
 //add events to those 3 buttons
 recordButton.addEventListener("click", startRecording);
-stopButton.addEventListener("click", stopRecording);
-pauseButton.addEventListener("click", pauseRecording);
+
+$(".recordButton").click(function(){
+startRecording()
+});
 
 function startRecording() {
     console.log("recordButton clicked");
@@ -33,8 +33,6 @@ function startRecording() {
     */
 
     recordButton.disabled = true;
-    stopButton.disabled = false;
-    pauseButton.disabled = false
 
     /*
     We're using the standard promise based getUserMedia()
@@ -68,8 +66,6 @@ function startRecording() {
     }).catch(function(err) {
         //enable the record button if getUserMedia() fails
         recordButton.disabled = false;
-        stopButton.disabled = true;
-        pauseButton.disabled = true
     });
 }
 
@@ -78,11 +74,9 @@ function pauseRecording(){
     if (rec.recording){
         //pause
         rec.stop();
-        pauseButton.innerHTML="Resume";
     }else{
         //resume
         rec.record()
-        pauseButton.innerHTML="Pause";
     }
 }
 
@@ -90,13 +84,9 @@ function stopRecording() {
     console.log("stopButton clicked");
 
     //disable the stop button, enable the record too allow for new recordings
-    stopButton.disabled = true;
     recordButton.disabled = false;
-    pauseButton.disabled = true;
 
     //reset button just in case the recording is stopped while paused
-    pauseButton.innerHTML="Pause";
-
     //tell the recorder to stop the recording
     rec.stop();
 
@@ -109,51 +99,29 @@ function stopRecording() {
 
 function createDownloadLink(blob) {
 
-    var url = URL.createObjectURL(blob);
-    var au = document.createElement('audio');
-    var li = document.createElement('li');
-    var link = document.createElement('a');
+	var url = URL.createObjectURL(blob);
+	var link = document.createElement('a');
 
-    //add controls to the <audio> element
-    au.controls = true;
-    au.src = url;
-
-    //link the a element to the blob
-    link.href = url;
-    link.download = new Date().toISOString() + '.wav';
-    link.innerHTML = link.download;
-
-    //add the new audio and a elements to the li element
-    li.appendChild(au);
-    li.appendChild(link);
-
-    //add the li element to the ordered list
-    recordingsList.appendChild(li);
-    //saveAs(blob, "sound.wav")
-
+	//link the a element to the blob
+	link.href = url;
+	link.download = new Date().toISOString() + '.wav';
 	var filename = new Date().toISOString(); //filename to send to server without extension
 
-//upload link
-var upload = document.createElement('a');
-upload.href="#";
-upload.innerHTML = "Analyze";
-upload.addEventListener("click", function(event){
-      var xhr=new XMLHttpRequest();
-      xhr.onload=function(e) {
-          if(this.readyState === 4) {
-              console.log("Server returned: ",e.target.responseText);
-          }
-          if (this.readyState == XMLHttpRequest.DONE) {
-	        alert(this.responseText); // display on page as ajax
-    }
-      };
-      var fd=new FormData();
-      filename = filename + ".wav";
-      console.log(filename)
-      fd.append("file",blob, filename);
-      xhr.open("POST","/upload_new",true);
-      xhr.send(fd);
-})
-li.appendChild(document.createTextNode (" "))//add a space in between
-li.appendChild(upload)//add the upload link to li
+	var xhr=new XMLHttpRequest();
+	xhr.onload=function(e) {
+		if(this.readyState === 4) {
+              		console.log("Server returned: ",e.target.responseText);
+          	}
+          	
+		if (this.readyState == XMLHttpRequest.DONE) {
+	        	alert(this.responseText); // display on page as ajax
+		}
+      	};
+
+      	var fd=new FormData();
+      	filename = filename + ".wav";
+      	fd.append("file",blob, filename);
+      	xhr.open("POST","/upload_new",true);
+      	xhr.send(fd);
+
 }
