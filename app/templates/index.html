@@ -17,35 +17,50 @@
 			<img src="static/svg/arrow.svg">
   		</div>
 
-  		<div class="clear"/>
+		<div class="clear"/> </div>
 
-  		<div class="upload_sound">
-			<form action="/upload" method="post" enctype="multipart/form-data">
-    				Select sound to upload
-    				<br>
+		<div class="upload_ui">
+			<div class="upload_sound">
+				<form action="/upload" method="post" enctype="multipart/form-data">
+					Select sound to upload
+					<br>
+					<br>
+					<img src="static/svg/upload.svg">
+					<br>
+					<input type="file" name="file">
+					<br>
+					<input type="submit" value="Upload Sound">
+				</form>
+			</div>
+
+			<div class="or">
+			or
+			</div>
+	  
+			<div class="record_sound">
+				Record your sound
+				 <br>
 				<br>
-    				<img src="static/svg/upload.svg">
-    				<br>
-	    			<input type="file" name="file">
-	    			<br>
-	    			<input type="submit" value="Upload Sound">
-			</form>
- 	 	</div>
 
-  		<div class="or">
-	  	or
-  		</div>
-  
-  		<div class="record_sound">
-	  		Record your sound
-	 		 <br>
-	  		<br>
+				<div id="recordButton">
+					<img src="static/svg/record.svg">
+				</div>
+				<ol id="recordingsList"></ol>
+			</div>
+		</div>
+		<div class="clear"/> </div>
+		<div class="loading_ui">
+			<br>
+			<br>
+			<img src="static/svg/upload.svg">
+			<br>
+			<br>
+			<p>Listening...</p>
+		</div>
+		<div class="clear"/> </div>
 
-	  		<div id="recordButton">
-	  			<img src="static/svg/record.svg">
-	  		</div>
-  			<ol id="recordingsList"></ol>
-  		</div>
+		<div class="results"></div>
+
 
 	</div>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -53,5 +68,8 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   	<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
   	<script src="static/js/whisp.js"></script>
+
+	<script> $(".loading_ui").hide();</script>
+
 	</body>
 </html>

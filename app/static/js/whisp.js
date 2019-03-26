@@ -20,6 +20,9 @@ startRecording()
 
 function startRecording() {
     console.log("recordButton clicked");
+	$(".upload_ui").hide();
+	$(".loading_ui").show();
+	$(".results").text("");
 
     /*
     Simple constraints object, for more advanced audio features see
@@ -83,6 +86,7 @@ function pauseRecording(){
 function stopRecording() {
     console.log("stopButton clicked");
 
+
     //disable the stop button, enable the record too allow for new recordings
     recordButton.disabled = false;
 
@@ -114,7 +118,9 @@ function createDownloadLink(blob) {
           	}
           	
 		if (this.readyState == XMLHttpRequest.DONE) {
-	        	alert(this.responseText); // display on page as ajax
+			$(".upload_ui").show();
+			$(".loading_ui").hide();
+			$(".results").text(this.responseText);
 		}
       	};
 
