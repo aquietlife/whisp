@@ -129,5 +129,19 @@ function createDownloadLink(blob) {
       	fd.append("file",blob, filename);
       	xhr.open("POST","/upload_new",true);
       	xhr.send(fd);
-
 }
+
+document.querySelector('#choose-button').addEventListener('click', function() {
+	document.querySelector('#upload-file').click();
+
+});
+
+document.querySelector('#upload-file').addEventListener('change', function() {
+	// This is the file user has chosen
+	$(".upload_ui").hide();
+	$(".loading_ui").show();
+	$(".results").text("");
+	var file = this.files[0];
+	file = document.querySelector('#upload-file').files[0]
+	createDownloadLink(file)
+});

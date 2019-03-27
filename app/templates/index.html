@@ -21,16 +21,11 @@
 
 		<div class="upload_ui">
 			<div class="upload_sound">
-				<form action="/upload" method="post" enctype="multipart/form-data">
 					Select sound to upload
 					<br>
 					<br>
-					<img src="static/svg/upload.svg">
-					<br>
-					<input type="file" name="file">
-					<br>
-					<input type="submit" value="Upload Sound">
-				</form>
+				<input type="file" style="display:none" id="upload-file" />
+				<img id="choose-button"src="static/svg/upload.svg">
 			</div>
 
 			<div class="or">
