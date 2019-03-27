@@ -9,14 +9,27 @@ body {
     	background-attachment: fixed;
     	background-image: linear-gradient(#02071D , #05113E);
 	color: #E35E71;
+	font-family: 'CircularStd-Bold'
 }
 
 .container {
 	text-align: center;
-	padding: 100px;
+	padding: 100px
 }
 .header {
 	display: inline-block;
+}
+
+.upload_ui {
+	color: #BFE4F6;
+}
+
+.loading_ui {
+	color: #BFE4F6;
+}
+
+.results {
+	color: #BFE4F6;
 }
 
 .upload_sound {
@@ -39,4 +52,10 @@ body {
 
 .clear {
 	clear: both;
+}
+
+@font-face {
+    font-family: CircularStd-Bold;
+    font-weight: bold;
+    src: url("../fonts/CircularStd-Bold.otf") format("opentype");
 }
