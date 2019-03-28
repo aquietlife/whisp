@@ -21,8 +21,10 @@ startRecording()
 function startRecording() {
     console.log("recordButton clicked");
 	$(".upload_ui").hide();
+	$(".credits").hide();
 	$(".loading_ui").show();
 	$(".results").text("");
+	$("#json").text("");
 
     /*
     Simple constraints object, for more advanced audio features see
@@ -118,9 +120,22 @@ function createDownloadLink(blob) {
           	}
           	
 		if (this.readyState == XMLHttpRequest.DONE) {
+			var obj = JSON.parse(this.responseText);
 			$(".upload_ui").show();
+			$(".credits").show();
 			$(".loading_ui").hide();
-			$(".results").text(this.responseText);
+			var top_prediction_name = obj["predictions"][0][0];
+			top_prediction_name = top_prediction_name.split('_').join(' ');
+			var top_prediction_number = Math.round(obj["predictions"][0][1] * 100) ;//obj["predictions"][0][1];
+			var html = "Top Prediction: " + top_prediction_name + " with " + top_prediction_number + "% confidence!";
+
+			html += "<br><br> Full report below: <br><br>"
+			html += JSON.stringify(obj, undefined, 5);
+			$(".results").html(html);
+			var formattedData = JSON.stringify(obj, null, 2); 
+			$('#json').text(formattedData);
+
+			//document.getElementById("json").innerHTML = JSON.stringify(obj, undefined, 5);
 		}
       	};
 
@@ -139,8 +154,10 @@ document.querySelector('#choose-button').addEventListener('click', function() {
 document.querySelector('#upload-file').addEventListener('change', function() {
 	// This is the file user has chosen
 	$(".upload_ui").hide();
+	$(".credits").hide()
 	$(".loading_ui").show();
 	$(".results").text("");
+	$("#json").text("");
 	var file = this.files[0];
 	file = document.querySelector('#upload-file').files[0]
 	createDownloadLink(file)
