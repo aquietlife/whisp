@@ -12,27 +12,29 @@
 	
 	<div class="container">
 
-  		<div class="header">
-			<h1>w h i s p</h1>
-			<img src="static/svg/arrow.svg">
-  		</div>
+		<div class="row">
+			<div class="col-sm header">
+				<h1>whisp</h1>
+				<img src="static/svg/arrow.svg" class="img-fluid">
+			</div>
+		</div>
 
 		<div class="clear"/> </div>
 
-		<div class="upload_ui">
-			<div class="upload_sound">
-					Select sound to upload
+		<div class="row upload_ui">
+			<div class="col-sm upload_sound">
+					Upload 5 second sound
 					<br>
 					<br>
 				<input type="file" style="display:none" id="upload-file" />
 				<img id="choose-button"src="static/svg/upload.svg">
 			</div>
 
-			<div class="or">
+			<div class="col-sm or">
 			or
 			</div>
 	  
-			<div class="record_sound">
+			<div class="col-sm record_sound">
 				Record your sound
 				 <br>
 				<br>
@@ -44,17 +46,25 @@
 			</div>
 		</div>
 		<div class="clear"/> </div>
-		<div class="loading_ui">
+		<div class="loading_ui" style="display: none;" >
 			<br>
 			<br>
-			<img src="static/svg/upload.svg">
+			<!--
+			<img src="static/svg/arrow.svg">
 			<br>
 			<br>
+			-->
 			<p>Listening...</p>
 		</div>
 		<div class="clear"/> </div>
 
 		<div class="results"></div>
+		<div class="clear"/> </div>
+		<!--<pre id="json"></pre>-->
+		<div class="clear"/> </div>
+		<div class="credits">
+			<a href="https://github.com/aquietlife/whisp">Try on Github!</a>
+		</div>
 
 
 	</div>
@@ -63,8 +73,6 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   	<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
   	<script src="static/js/whisp.js"></script>
-
-	<script> $(".loading_ui").hide();</script>
 
 	</body>
 </html>

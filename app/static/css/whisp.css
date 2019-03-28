@@ -2,6 +2,12 @@ html {
 	height: 100%;
 }
 
+a, a:hover, a:visited, a:link, a:active{
+	color: #E35E71;
+	font-family: 'CircularStd-Bold'
+	text-decoration: none;
+}
+
 body {
 	height: 100%;
     	margin: 0;
@@ -17,7 +23,7 @@ body {
 	padding: 100px
 }
 .header {
-	display: inline-block;
+	text-align: center;
 }
 
 .upload_ui {
@@ -29,29 +35,35 @@ body {
 }
 
 .results {
-	color: #BFE4F6;
+	color: #E35E71;
 }
 
 .upload_sound {
-	padding: 20px;
-	width: 33%;
-	float: left;
+	padding: 5%;
 }
 
 .record_sound {
-	padding: 20px;
-	width: 33%;
-	float: left;
+	padding: 5%;
 }
 
 .or {
-	padding: 20px;
-	width: 33%;
-	float: left;
+	padding: 5%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.credits {
+	padding: 5%;
 }
 
 .clear {
 	clear: both;
+}
+
+#json {
+	color: #E35E71;
+	font-family: 'CircularStd-Bold'
+	width: 100%;
 }
 
 @font-face {
