@@ -1,4 +1,5 @@
-import librosa
+import os
+import time
 from PIL import Image
 from starlette.applications import Starlette
 from starlette.responses import JSONResponse, HTMLResponse, RedirectResponse
@@ -28,11 +29,6 @@ import numpy as np
 
 templates = Jinja2Templates(directory='app/templates')
 
-async def get_bytes(url):
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as response:
-            return await response.read()
-
 app = Starlette(debug=True)
 
 app.mount('/static', StaticFiles(directory='app/static'))
@@ -43,62 +39,26 @@ classes = ['airplane', 'breathing', 'brushing_teeth', 'can_opening', 'car_horn',
 
 learn = load_learner(path, 'models/export.pkl')
 
-@app.route("/upload", methods=["POST"])
-async def upload(request):
-    data = await request.form()
-    bytes = await (data["file"].read())
-    wav = BytesIO(bytes) #not my favorite way to do this but it works ;)
-    with open('tmp/sound.wav', 'wb') as f:
-        f.write(wav.getvalue())
-    wav.close()
-    return predict_sound_from_wav()
-
-@app.route("/upload_new", methods=["POST"])
-async def upload_new(request):
-    form = await request.form()
-    print(form)
-    print(form["file"].filename)
-    audio_file = form["file"].file
-    bytes = await (form["file"].read())
-    wav = BytesIO(bytes) #not my favorite way to do this but it works ;)
-    #await form["file"].write(audio_file)
-    with open('tmp/sound.wav', 'wb') as f:
-        f.write(wav.getvalue())
-    wav.close()
-    return predict_sound_from_wav()
-
-@app.route("/classify-url", methods=["GET"])
-async def classify_url(request):
-    bytes = await get_bytes(request.query_params["url"])
-    return predict_image_from_bytes(bytes)
-
-def predict_sound_from_wav():
-    #convert sound to image
-    create_spectrograph("tmp/sound.wav", "tmp/image.jpg") 
-
-    img_bytes = BytesIO()
-    #load image from disk
-    with open('tmp/image.jpg', 'rb') as f:
-         img_bytes = BytesIO(f.read())
-    #img_bytes.close()
-
-    #img = Image.open('image.jpg')
-    img = open_image(img_bytes)
-    _,_,losses = learn.predict(img)
-    return JSONResponse({
-        "predictions": sorted(
-            zip(classes, map(float, losses)),
-            key=lambda p: p[1],
-            reverse=True
-        )
-    })
-
 @app.route('/')
 async def homepage(request):
     return templates.TemplateResponse('index.html', {'request': request})
 
-def create_spectrograph(source_filepath, destination_filepath):    
-    y, sr = librosa.load(source_filepath, sr = 22050) # Use the default sampling rate of 22,050 Hz
+@app.route("/upload", methods=["POST"])
+async def upload(request):
+    form = await request.form()
+    bytes = await (form["file"].read())
+    wav = BytesIO(bytes) #not my favorite way to do this but it works ;)
+
+    utc_time = str(int(time.time()))
+    sound_file = "tmp/sound_" + utc_time + ".wav"
+    image_file = "tmp/image_" + utc_time + ".jpg"
+    
+    with open(sound_file, 'wb') as f:
+        f.write(wav.getvalue())
+    wav.close()
+
+    #convert sound to image
+    y, sr = librosa.load(sound_file, sr = 22050) # Use the default sampling rate of 22,050 Hz
     #y, sr = soundfile.read(source_filepath) try this again later
 
     # Pre-emphasis filter
@@ -113,20 +73,34 @@ def create_spectrograph(source_filepath, destination_filepath):
                                        hop_length=512, 
                                        n_mels = 96, # As per the Google Large-scale audio CNN paper
                                        power = 2) # Power = 2 refers to squared amplitude
-    # Power in DB
     log_power = librosa.power_to_db(M, ref=np.max)# Covert to dB (log) scale
     
     # Plotting the spectrogram and save as JPG without axes (just the image)
-    #pylab.figure(figsize=(5,5)) #was 14, 5
     pylab.axis('off') 
     pylab.axes([0., 0., 1., 1.], frameon=False, xticks=[], yticks=[]) # Remove the white edge
     librosa.display.specshow(log_power, cmap=cm.jet)
-    pylab.savefig(destination_filepath, bbox_inches=None, pad_inches=0)
+    pylab.savefig(image_file, bbox_inches=None, pad_inches=0)
     pylab.close()
 
-@app.route("/form")
-def redirect_to_homepage(request):
-    return RedirectResponse("/")
+    img_bytes = BytesIO()
+    with open(image_file, 'rb') as f:
+         img_bytes = BytesIO(f.read())
+
+    img = open_image(img_bytes)
+    _,_,losses = learn.predict(img)
+
+    #delete temp files
+    if os.path.exists(sound_file):
+        os.remove(sound_file)
+    if os.path.exists(image_file):
+        os.remove(image_file)
+    return JSONResponse({
+        "predictions": sorted(
+            zip(classes, map(float, losses)),
+            key=lambda p: p[1],
+            reverse=True
+        )
+    })
 
 if __name__ == "__main__":
     if "serve" in sys.argv:
