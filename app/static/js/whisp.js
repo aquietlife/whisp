@@ -142,7 +142,7 @@ function createDownloadLink(blob) {
       	var fd=new FormData();
       	filename = filename + ".wav";
       	fd.append("file",blob, filename);
-      	xhr.open("POST","/upload_new",true);
+      	xhr.open("POST","/upload",true);
       	xhr.send(fd);
 }
 
