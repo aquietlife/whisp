@@ -10,6 +10,8 @@ var AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioContext = new AudioContext; //new audio context to help us record
  
 var recordButton = document.getElementById("recordButton");
+
+var prediction = "";
  
 //add events to those 3 buttons
 recordButton.addEventListener("click", startRecording);
@@ -18,18 +20,27 @@ $(".recordButton").click(function(){
 startRecording()
 });
 
+$(".correct").click(function(){
+	$(".incorrect_div").hide()
+	$(".correct_div").show()
+});
+
+$(".incorrect").click(function(){
+	$(".correct_div").hide()
+	$(".incorrect_div").show()
+});
+
 function startRecording() {
     console.log("recordButton clicked");
 	$(".upload_ui").hide();
 	$(".credits").hide();
+	$(".confirmation").hide();
+	$(".correct_div").hide()
+	$(".incorrect_div").hide()
 	$(".loading_ui").show();
+	$(".full_results").hide();
 	$(".results").text("");
 	$("#json").text("");
-
-    /*
-    Simple constraints object, for more advanced audio features see
-    <div class="video-container"><blockquote class="wp-embedded-content" data-secret="cVHlrYJoGD"><a href="https://addpipe.com/blog/audio-constraints-getusermedia/">Supported Audio Constraints in getUserMedia()</a></blockquote><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" src="https://addpipe.com/blog/audio-constraints-getusermedia/embed/#?secret=cVHlrYJoGD" data-secret="cVHlrYJoGD" title="“Supported Audio Constraints in getUserMedia()” — Pipe Blog" marginwidth="0" marginheight="0" scrolling="no" width="600" height="338" frameborder="0"></iframe></div>
-    */
 
     var constraints = { audio: true, video:false }
 
@@ -116,7 +127,7 @@ function createDownloadLink(blob) {
 	var xhr=new XMLHttpRequest();
 	xhr.onload=function(e) {
 		if(this.readyState === 4) {
-              		console.log("Server returned: ",e.target.responseText);
+              		//console.log("Server returned: ",e.target.responseText);
           	}
           	
 		if (this.readyState == XMLHttpRequest.DONE) {
@@ -124,18 +135,24 @@ function createDownloadLink(blob) {
 			$(".upload_ui").show();
 			$(".credits").show();
 			$(".loading_ui").hide();
+			$(".correct_div").hide()
+			$(".incorrect_div").hide()
 			var top_prediction_name = obj["predictions"][0][0];
+			prediction = obj["predictions"][0][0]; 
 			top_prediction_name = top_prediction_name.split('_').join(' ');
 			var top_prediction_number = Math.round(obj["predictions"][0][1] * 100) ;//obj["predictions"][0][1];
-			var html = "Top Prediction: " + top_prediction_name + " with " + top_prediction_number + "% confidence!";
+			var top_prediction = "Top Prediction: " + top_prediction_name + " with " + top_prediction_number + "% confidence!";
+			$(".results").html(top_prediction);
 
-			html += "<br><br> Full report below: <br><br>"
-			html += JSON.stringify(obj, undefined, 5);
-			$(".results").html(html);
+			$(".confirmation").show();
+
+			var full_results = "<br><br> Full report below: <br><br>"
+			full_results += JSON.stringify(obj, undefined, 5);
+			$(".full_results").html(full_results);
+			$(".full_results").show()
+			
 			var formattedData = JSON.stringify(obj, null, 2); 
 			$('#json').text(formattedData);
-
-			//document.getElementById("json").innerHTML = JSON.stringify(obj, undefined, 5);
 		}
       	};
 
@@ -154,11 +171,57 @@ document.querySelector('#choose-button').addEventListener('click', function() {
 document.querySelector('#upload-file').addEventListener('change', function() {
 	// This is the file user has chosen
 	$(".upload_ui").hide();
-	$(".credits").hide()
+	$(".credits").hide();
+	$(".confirmation").hide();
+	$(".correct_div").hide();
+	$(".incorrect_div").hide();
+	$(".full_results").hide();
 	$(".loading_ui").show();
 	$(".results").text("");
 	$("#json").text("");
 	var file = this.files[0];
 	file = document.querySelector('#upload-file').files[0]
 	createDownloadLink(file)
+});
+
+document.querySelector('#category-button').addEventListener('click', function() {
+	var file = document.querySelector('#upload-file').files[0]
+
+	var select_element = document.getElementById("sound_category");
+	var select_category = select_element.options[select_element.selectedIndex].value;
+
+	var select_category_fill_in = document.getElementById("sound_category_fill_in").value;
+
+	console.log(file)
+	console.log(select_category)
+	console.log(select_category_fill_in)
+
+	var xhr=new XMLHttpRequest();
+	xhr.onload=function(e) {
+		if(this.readyState === 4) {
+              		console.log("Server returned: ",e.target.responseText);
+          	}
+          	
+		if (this.readyState == XMLHttpRequest.DONE) {
+
+			var obj = JSON.parse(this.responseText); // not sure what to do with it yet
+			$(".category_submission").hide();
+			$(".confirmation_success").show();
+			setTimeout(function() { $(".confirmation_success").hide(); }, 5000);
+	
+		}
+      	};
+
+	//send sound and info back to server
+      	var fd=new FormData();
+	var filename = new Date().toISOString(); //filename to send to server without extension
+      	filename = filename + ".wav";
+      	fd.append("file",file, filename);
+        fd.append("guessed_category", prediction);
+	fd.append("select_category",select_category); 
+	fd.append("select_category_fill_in",select_category_fill_in); 
+      	xhr.open("POST","/upload-category",true);
+      	xhr.send(fd);
+	$(".category_submission").show();
+	$(".incorrect_div").hide();
 });

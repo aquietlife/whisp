@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-sm header">
 				<h1><a href="/">whisp</a></h1>
-				<img src="static/svg/arrow.svg" class="img-fluid">
+				<img src="static/svg/arrow2.svg" class="img-fluid">
 			</div>
 		</div>
 
@@ -49,18 +49,96 @@
 		<div class="loading_ui" style="display: none;" >
 			<br>
 			<br>
-			<!--
-			<img src="static/svg/arrow.svg">
-			<br>
-			<br>
-			-->
 			<p>Listening...</p>
 		</div>
 		<div class="clear"/> </div>
 
 		<div class="results"></div>
 		<div class="clear"/> </div>
-		<!--<pre id="json"></pre>-->
+		<div class="confirmation" style="display: none;">
+		<br><br>Was this prediction accurate? <a class='correct' href='javascript:void(0);'>Yes</a> / <a class='incorrect' href='javascript:void(0);'>No</a><br><br>
+		</div>
+		<div class="clear"/> </div>
+		<div class="correct_div" style="display: none;">
+		<br>Great! Thank you!</br>
+		</div>
+		<div class="clear"/> </div>
+		<div class="incorrect_div" style="display: none;">
+		<!--<div class="incorrect_div">-->
+		<br>Bummer :( Would you mind helping improving Whisp by letting us know what kind of sound this is? Please select from the following categories or write one into the box if its not available from the drop down:</br></br>
+ <form name='sound_category'>
+   Category: <select id="sound_category" name='sound_category'>
+   <option value='airplane'>airplane</option>
+   <option value='breathing'>breathing</option>
+   <option value='brushing_teeth'>brushing_teeth</option>
+   <option value='can_opening'>can_opening</option>
+   <option value='car_horn'>car_horn</option>
+   <option value='cat'>cat</option>
+   <option value='chainsaw'>chainsaw</option>
+   <option value='chirping_birds'>chirping_birds</option>
+   <option value='church_bells'>church_bells</option>
+   <option value='clapping'>clapping</option>
+   <option value='clock_alarm'>clock_alarm</option>
+   <option value='clock_tick'>clock_tick</option>
+   <option value='coughing'>coughing</option>
+   <option value='cow'>cow</option>
+   <option value='crackling_fire'>crackling_fire</option>
+   <option value='crickets'>crickets</option>
+   <option value='crow'>crow</option>
+   <option value='crying_baby'>crying_baby</option>
+   <option value='dog'>dog</option>
+   <option value='door_wood_creaks'>door_wood_creaks</option>
+   <option value='door_wood_knock'>door_wood_knock</option>
+   <option value='drinking_sipping'>drinking_sipping</option>
+   <option value='engine'>engine</option>
+   <option value='fireworks'>fireworks</option>
+   <option value='footsteps'>footsteps</option>
+   <option value='frog'>frog</option>
+   <option value='glass_breaking'>glass_breaking</option>
+   <option value='hand_saw'>hand_saw</option>
+   <option value='helicopter'>helicopter</option>
+   <option value='hen'>hen</option>
+   <option value='insects'>insects</option>
+   <option value='keyboard_typing'>keyboard_typing</option>
+   <option value='laughing'>laughing</option>
+   <option value='mouse_click'>mouse_click</option>
+   <option value='pig'>pig</option>
+   <option value='pouring_water'>pouring_water</option>
+   <option value='rain'>rain</option>
+   <option value='rooster'>rooster</option>
+   <option value='sea_waves'>sea_waves</option>
+   <option value='sheep'>sheep</option>
+   <option value='siren'>siren</option>
+   <option value='sneezing'>sneezing</option>
+   <option value='snoring'>snoring</option>
+   <option value='thunderstorm'>thunderstorm</option>
+   <option value='toilet_flush'>toilet_flush</option>
+   <option value='train'>train</option>
+   <option value='vacuum_cleaner'>vacuum_cleaner</option>
+   <option value='washing_machine'>washing_machine</option>
+   <option value='water_drops'>water_drops</option>
+   <option value='wind'>wind</option>
+   <option value='none'>none</option>
+   </select>
+    or 
+   <input id="sound_category_fill_in" name="sound_category_fill_in" placeholder="Fill-in category"/>
+   <a href='javascript:void(0);' id="category-button">Submit</a>
+   <!--<input type='submit' name='submit' value="Submit"/>-->
+   </form>
+		</div>
+		<div class="clear"/> </div>
+		<div class="category_submission" style="display: none;" >
+			<br>
+			<br>
+			<p>Submitting...</p>
+		</div>
+		<div class="clear"/> </div>
+		<div class="confirmation_success" style="display: none;">
+			<br>
+			<br>
+			<p>Thank you for helping to improve Whisp :)!</p>
+		</div>
+		<div class="full_results"></div>
 		<div class="clear"/> </div>
 		<div class="credits">
 			Code on <a href="https://github.com/aquietlife/whisp">Github</a>

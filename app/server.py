@@ -1,5 +1,6 @@
 import os
 import time
+import datetime
 from PIL import Image
 from starlette.applications import Starlette
 from starlette.responses import JSONResponse, HTMLResponse, RedirectResponse
@@ -26,6 +27,29 @@ import pylab
 import librosa
 from librosa import display
 import numpy as np
+
+import boto3, botocore
+
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+import pymongo
+from pymongo import MongoClient
+
+#load env variables from .env file
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+
+s3 = boto3.client(
+   "s3",
+   aws_access_key_id=os.environ.get('WHISP_S3_KEY'),
+   aws_secret_access_key=os.environ.get('WHISP_S3_SECRET_ACCESS_KEY')
+)
+
+mongo_client = MongoClient(os.environ.get('WHISP_MONGO_DB'))
+db = mongo_client.whisp
+sounds = db.sounds
+
 
 templates = Jinja2Templates(directory='app/templates')
 
@@ -102,6 +126,61 @@ async def upload(request):
             reverse=True
         )
     })
+
+@app.route("/upload-category", methods=["POST"])
+async def upload(request):
+    form = await request.form()
+    bytes = await (form["file"].read())
+    wav = BytesIO(bytes) #not my favorite way to do this but it works ;)
+
+    utc_time = str(int(time.time()))
+    sound_filename = "tmp/sound_" + utc_time + ".wav"
+    
+    with open(sound_filename, 'wb') as f:
+        f.write(wav.getvalue())
+    wav.close()
+
+    guessed_category = form["guessed_category"]
+    print(guessed_category)
+
+    select_category = form["select_category"]
+    print(select_category)
+
+    select_category_fill_in = form["select_category_fill_in"]
+    print(select_category_fill_in)
+
+    s3_file_path = ""
+    # post file
+    with open(sound_filename, "rb") as f:
+        try:
+            s3.upload_fileobj(
+                f, 
+                os.environ.get('WHISP_S3_BUCKET'), 
+                sound_filename[4:], #remove tmp/ 
+                ExtraArgs={
+                    "ACL": "public-read"
+                }
+             )
+        except Exception as e:
+            print("Something Happened: ", e)
+            return e
+        s3_file_path = "{}{}".format('http://{}.s3.amazonaws.com/'.format(os.environ.get('WHISP_S3_BUCKET')), sound_filename[4:])
+        print(s3_file_path)
+
+
+    sound_data = {"url": s3_file_path,
+                 "guessed_category": guessed_category,
+                 "select_category": select_category,
+                 "select_category_fill_in": select_category_fill_in,
+                 "date": datetime.datetime.utcnow()}
+
+    sounds.insert_one(sound_data)
+
+    #delete temp files
+    if os.path.exists(sound_filename):
+        os.remove(sound_filename)
+
+    return JSONResponse({"response": "ok"})
 
 if __name__ == "__main__":
     if "serve" in sys.argv:
