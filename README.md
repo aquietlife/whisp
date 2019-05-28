@@ -6,6 +6,8 @@ _An Environmental Sound Classifier_
 
 https://whisp.onrender.com
 
+(Current works on desktop Firefox and mobile Safari on iOS!)
+
 ## Overview
 
 This project comprises of three main parts:
