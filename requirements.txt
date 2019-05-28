@@ -6,6 +6,8 @@ pytest
 seaborn
 tqdm
 fastai==1.0.44
+torch=1.0.1.post2
+torchvision=0.2.2.post3
 starlette
 uvicorn
 aiohttp
