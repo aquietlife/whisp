@@ -124,13 +124,16 @@ function createDownloadLink(blob) {
 	link.download = new Date().toISOString() + '.wav';
 	var filename = new Date().toISOString(); //filename to send to server without extension
 
+
+	
 	var xhr=new XMLHttpRequest();
 	xhr.onload=function(e) {
 		if(this.readyState === 4) {
-              		//console.log("Server returned: ",e.target.responseText);
+              		console.log("Server returned: ",e.target.responseText);
           	}
           	
 		if (this.readyState == XMLHttpRequest.DONE) {
+			console.log(this.responseText);	
 			var obj = JSON.parse(this.responseText);
 			$(".upload_ui").show();
 			$(".credits").show();
@@ -203,7 +206,6 @@ document.querySelector('#category-button').addEventListener('click', function() 
           	}
           	
 		if (this.readyState == XMLHttpRequest.DONE) {
-
 			var obj = JSON.parse(this.responseText); // not sure what to do with it yet
 			$(".category_submission").hide();
 			$(".confirmation_success").show();

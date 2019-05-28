@@ -151,4 +151,14 @@ The repo is set up to deploy easily to any number of web hosting services that s
 
 I ended up going with [Render](https://render.com/), but you can use whatever works for you :)
 
+## Misc
+
+You can create movies from the spectrograms with the following command:
+
+`ffmpeg -i animated.gif -movflags faststart -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" video.mp4`
+
+from here:
+
+https://unix.stackexchange.com/questions/40638/how-to-do-i-convert-an-animated-gif-to-an-mp4-or-mv4-on-the-command-line
+
 ## Happy listening!
