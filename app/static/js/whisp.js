@@ -12,6 +12,7 @@ var audioContext = new AudioContext; //new audio context to help us record
 var recordButton = document.getElementById("recordButton");
 
 var prediction = "";
+var sound_file;
  
 //add events to those 3 buttons
 recordButton.addEventListener("click", startRecording);
@@ -119,6 +120,8 @@ function createDownloadLink(blob) {
 	var url = URL.createObjectURL(blob);
 	var link = document.createElement('a');
 
+	sound_file = blob;
+
 	//link the a element to the blob
 	link.href = url;
 	link.download = new Date().toISOString() + '.wav';
@@ -161,7 +164,7 @@ function createDownloadLink(blob) {
 
       	var fd=new FormData();
       	filename = filename + ".wav";
-      	fd.append("file",blob, filename);
+      	fd.append("file",sound_file, filename);
       	xhr.open("POST","/upload",true);
       	xhr.send(fd);
 }
@@ -189,13 +192,16 @@ document.querySelector('#upload-file').addEventListener('change', function() {
 
 document.querySelector('#category-button').addEventListener('click', function() {
 	var file = document.querySelector('#upload-file').files[0]
+	if (sound_file === undefined) {
+		sound_file = file;
+	}
 
 	var select_element = document.getElementById("sound_category");
 	var select_category = select_element.options[select_element.selectedIndex].value;
 
 	var select_category_fill_in = document.getElementById("sound_category_fill_in").value;
 
-	console.log(file)
+	console.log(sound_file)
 	console.log(select_category)
 	console.log(select_category_fill_in)
 
@@ -218,7 +224,7 @@ document.querySelector('#category-button').addEventListener('click', function() 
       	var fd=new FormData();
 	var filename = new Date().toISOString(); //filename to send to server without extension
       	filename = filename + ".wav";
-      	fd.append("file",file, filename);
+      	fd.append("file",sound_file, filename);
         fd.append("guessed_category", prediction);
 	fd.append("select_category",select_category); 
 	fd.append("select_category_fill_in",select_category_fill_in); 
