@@ -8,6 +8,8 @@ https://whisp.onrender.com
 
 (Current works on desktop Firefox and mobile Safari on iOS!)
 
+I wrote a bit about Whisp, the ESC-50 dataset, training an environmental sound classifier, and some insights i had along the way while testing it in the field on my blog [A Quite Life](http://aquiet.life/software/whisp).
+
 ## Overview
 
 This project comprises of three main parts:
