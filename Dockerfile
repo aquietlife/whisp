@@ -9,7 +9,7 @@ RUN apt-get -y update && apt-get install -y wget nano git build-essential yasm p
 #install libsndfile (need to fix)
 #RUN apt-get install libsndfile1
 
-RUN  apt-get install libsndfile1
+# RUN  apt-get install libsndfile1
 
 ADD requirements.txt .
 
