@@ -5,20 +5,21 @@ var gumStream; //stream from getUserMedia()
 var rec; //Recorder.js object
 var input; //MediaStreamAudioSourceNode we'll be recording
  
-// shim for AudioContext when it's not avb. 
-var AudioContext = window.AudioContext || window.webkitAudioContext;
-var audioContext = new AudioContext; //new audio context to help us record
  
 var recordButton = document.getElementById("recordButton");
 
 var prediction = "";
 var sound_file;
+
+var AudioContext;
+var audioContext;
  
 //add events to those 3 buttons
 recordButton.addEventListener("click", startRecording);
 
 $(".recordButton").click(function(){
-startRecording()
+	console.log("started recording")
+	startRecording()
 });
 
 $(".correct").click(function(){
@@ -31,8 +32,16 @@ $(".incorrect").click(function(){
 	$(".incorrect_div").show()
 });
 
+function startAudioContext() {
+// shim for AudioContext when it's not avb. 
+	console.log("starting audio context");
+	AudioContext = window.AudioContext || window.webkitAudioContext;
+	audioContext = new AudioContext; //new audio context to help us record
+}
+
 function startRecording() {
-    console.log("recordButton clicked");
+	startAudioContext()
+    	console.log("recordButton clicked");
 	$(".upload_ui").hide();
 	$(".credits").hide();
 	$(".confirmation").hide();
@@ -64,6 +73,8 @@ function startRecording() {
 
         /* use the stream */
         input = audioContext.createMediaStreamSource(stream);
+
+	console.log("created audio context")
 
         /*
         Create the Recorder object and configure to record mono sound (1 channel)
