@@ -67,6 +67,10 @@ learn = load_learner(path, 'models/export.pkl')
 async def homepage(request):
     return templates.TemplateResponse('index.html', {'request': request})
 
+@app.route('/rehearsal')
+async def homepage(request):
+    return templates.TemplateResponse('rehearsal.html', {'request': request})
+
 @app.route("/upload", methods=["POST"])
 async def upload(request):
     form = await request.form()
