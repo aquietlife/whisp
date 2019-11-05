@@ -169,7 +169,7 @@ function createDownloadLink(blob) {
 			top_prediction_name = top_prediction_name.split('_').join(' ');
 			var top_prediction_number = Math.round(obj["predictions"][0][1] * 100) ;//obj["predictions"][0][1];
 			var top_prediction = "<p>" + top_prediction_name + "</p>";
-			$(".results").append(top_prediction);
+			$(".results").prepend(top_prediction);
 
 
 			if (listen) {	
