@@ -42,7 +42,8 @@ function startAudioContext() {
 
 function startRecording() {
 
-	listen = !listen; // toggle listening
+	//listen = !listen; // toggle listening
+	listen = true;
 	console.log(listen)
 
 	if (listen){
@@ -174,13 +175,16 @@ function createDownloadLink(blob) {
 
 			if (listen) {	
 			// record again
-				rec.record()
 
+				startRecording()
+				/*
+				rec.record()
 				console.log("Recording started");
 				setTimeout(() => {
 				// this will trigger one final 'ondataavailable' event and set recorder state to 'inactive'
 				stopRecording();
 				}, 5000);
+				*/
 			}
 		}
       	};
