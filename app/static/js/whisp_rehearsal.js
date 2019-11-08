@@ -15,6 +15,7 @@ var AudioContext;
 var audioContext;
 
 var listen = false;
+recordButton.disabled = false;
  
 //add events to those 3 buttons
 recordButton.addEventListener("click", startRecording);
@@ -104,7 +105,7 @@ function startRecording() {
 
 	    }).catch(function(err) {
 		//enable the record button if getUserMedia() fails
-		//recordButton.disabled = false;
+		recordButton.disabled = false;
 	    });
 	}
 }
@@ -125,7 +126,7 @@ function stopRecording() {
 
 
     //disable the stop button, enable the record too allow for new recordings
-    //recordButton.disabled = false;
+    recordButton.disabled = false;
 
     //reset button just in case the recording is stopped while paused
     //tell the recorder to stop the recording
