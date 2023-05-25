@@ -15,7 +15,7 @@ aiofiles
 python-multipart
 imageio
 numpy
-tornado==4.5.3
+tornado==6.3.2
 boto3
 python-dotenv
 pymongo
